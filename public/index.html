@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SlideShow</title>
+    <link rel="stylesheet" href="slider.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body id="home">
+    <h1>Slider</h1>
+    <div class="slider">
+      <ul>
+        <li><img src="img/slide_img.png" alt="milky way" /></li>
+        <li><img src="img/slide_img.png" alt="milky way" /></li>
+        <li><img src="img/slide_img.png" alt="milky way" /></li>
+        <li><img src="img/slide_img.png" alt="milky way" /></li>
+      </ul>
+    </div>
+
+    <div id="slider-nav">
+      <button class="btn btn-default" data-dir="prev">Previous</button>
+      <button class="btn btn-default" data-dir="next">Next</button>
+    </div>
+    <script src="jquery.min.js"></script>
+    <script src="slider.js"></script>
+
+    <script type="text/javascript">
+      (function(){
+        "use strict";
+
+        var container = $("div.slider").css("overflow", "hidden").children("ul"),
+            slider    = new _slider(container, $("#slider-nav"));
+
+        slider.nav.find("button").on("click", function(){
+          slider.setCurrent($(this).data('dir'));
+          slider.transition();
+        });
+      }());
+    </script>
+    
+  </body>
+</html>
