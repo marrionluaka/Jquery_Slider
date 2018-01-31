@@ -27,10 +27,9 @@
     <script type="text/javascript">
       (function(){
         "use strict";
-
         var container = $("div.slider").css("overflow", "hidden").children("ul"),
-            slider    = new _slider(container, $("#slider-nav"));
-
+            slider    = new Slider(container, $("#slider-nav"));
+            
         slider.nav.find("button").on("click", function(){
           slider.setCurrent($(this).data('dir'));
           slider.transition();

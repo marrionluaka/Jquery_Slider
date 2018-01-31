@@ -1,39 +1,39 @@
-(function(){
-  "use strict";
+const Slider = (function(){
+"use strict";
 
-  function Slider(container, nav){
-    this.container = container;
-    this.nav       = nav.show();
+var _container,
+    _imgs,
+    _imgWidth,
+    _imgsLen,
+    _current;
 
-    this.imgs      = this.container.find('img');
-    this.imgWidth  = this.imgs[0].width;// 750px
-    this.imgsLen    = this.imgs.length;// 4
+  function _Slider(container, nav){
+      _container = container;
+      this.nav   = nav.show();
 
-    this.current   = 0;
+      _imgs      = _container.find('img');
+      _imgWidth  = _imgs[0].width;// 750px
+      _imgsLen   = _imgs.length;// 4
+
+      _current   = 0;
   }
 
-  Slider.prototype = (function(){
+  _Slider.prototype = {
+      transition: function _transition( coords ){
+          _container.animate({
+              'margin-left': coords || -(_current * _imgWidth)
+          });
+      },
 
-    function _transition( coords ){
-      this.container.animate({
-        'margin-left': coords || -(this.current * this.imgWidth)
-      })
-    }
+      setCurrent: function _setCurrent( dir ){
+          var pos = _current;
+          pos += ( ~~(dir === 'next') || -1 );
+          _current = (pos < 0) ? _imgsLen - 1 : pos % _imgsLen ;
 
-    function _setCurrent( dir ){
-      var pos = this.current;
-      pos += ( ~~(dir === 'next') || -1 );
-      this.current = (pos < 0) ? this.imgsLen - 1 : pos % this.imgsLen ;
+          return pos;
+      }
+  };
 
-      return pos;
-    }
-
-    return{
-      transition: _transition,
-      setCurrent: _setCurrent
-    };
-  }());
-
-  window._slider = Slider;
+return _Slider;
 
 }());
